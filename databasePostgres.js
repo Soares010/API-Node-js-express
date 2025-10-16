@@ -1,7 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { sql } from "./db.js";
 export class DatabasePostgres {
-  #videos = new Map();
 
   async list(search = "") {
     let videos;
@@ -17,7 +16,6 @@ export class DatabasePostgres {
     return videos;
   }
   async create(video) {
-    const id = randomUUID(); // NÃO PASSE ESSE ID SE ESTIVER A USAR BD RELACIONAL
     const { title, description, duration } = video;
     await sql`insert into videos (title, description, duration) VALUES (${title}, ${description}, ${duration})`;
   }
